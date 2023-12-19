@@ -1,0 +1,5 @@
+RewriteEngine On
+RewriteRule ^hash/([0-9a-zA-Z-]+)$ post/hash.php?hash=$1 [QSA,L]
+RewriteRule ^hash/([0-9a-zA-Z-]+)/([0-9a-zA-Z-]+)$ post/hash.php?hash=$1&bir=$2 [QSA,L]
+RewriteRule ^([0-9a-zA-Z-+_€₺\$\&]+)$ index.php?page=$1 [QSA,L]
+RewriteRule ^([0-9a-zA-Z-+_€₺\$\&]+)/([0-9a-zA-Z-+_€₺$]+)$ index.php?page=$1&bir=$2 [QSA,L]
