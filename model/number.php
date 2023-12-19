@@ -45,25 +45,29 @@ class NUMBER
     public function numberupdate()
     {
         if (isset($_POST['duzenle'])) {
-            echo "<pre>";
-            print_r($_POST);
             extract($_POST);
-
-            // Formdan gelen resim dosyasının adını 'resim' olarak değiştir
-            @$tmp_name = $_FILES['resim']["tmp_name"];
-            @$name = $_FILES['resim']["name"];
-            @$uzanti = "." . explode(".", $name)[1];
-
-            // Resmi yükleyerek kaydet
-            $uploads_dir = '../assets/img';
-            $ad = uniqid() . $uzanti;
-            $refimg = substr($uploads_dir, 3) . "/" . $ad;
-            @move_uploaded_file($tmp_name, "$uploads_dir/$ad");
-            $path = "assets/img/" . $ad;
-
+    
+            // Yeni bir resim yüklenmişse işlemleri gerçekleştir
+            if ($_FILES['resim']['size'] > 0) {
+                // Formdan gelen resim dosyasının adını 'resim' olarak değiştir
+                $tmp_name = $_FILES['resim']["tmp_name"];
+                $name = $_FILES['resim']["name"];
+                $uzanti = "." . explode(".", $name)[1];
+    
+                // Resmi yükleyerek kaydet
+                $uploads_dir = '../assets/img';
+                $ad = uniqid() . $uzanti;
+                $refimg = substr($uploads_dir, 3) . "/" . $ad;
+                move_uploaded_file($tmp_name, "$uploads_dir/$ad");
+                $path = "assets/img/" . $ad;
+            } else {
+                // Eğer yeni bir resim yüklenmediyse, mevcut resmi kullan
+                $path = $_POST['eski_resim'];
+            }
+    
             // Veritabanında güncelleme yapacak sorgu
             $update = $this->core->SorguCalistir("UPDATE liste SET ", "isim=?, numara=?, dogumtarihi=?, notlar=?, resim=? WHERE id=?", array($isim, $numara, $dogumtarihi, $notlar, $path, $id));
-
+    
             if ($update != false) {
                 header("Location:../index.php?ok");
                 exit();

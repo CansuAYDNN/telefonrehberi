@@ -44,9 +44,10 @@
                                         <td class="isim"><input name="notlar" class="form-control" style="width: 50%"
                                                 type="text" value="{{ $list['notlar'] }}"></td>
                                         <tr>
-                                            <td>Resim</td>
-                                            <td class="isim"><input name="resim" class="form-control"
-                                                    style="width: 50%;" type="file">
+                                        <td>Resim</td>
+                                            <td class="isim">
+                                                <input name="resim" class="form-control" style="width: 50%;" type="file">
+                                                <input name="eski_resim" class="form-control" style="width: 50%;" type="hidden" value="{{ $list['resim']}}">
                                             </td>
                                         </tr>
                                         <tr>
