@@ -35,7 +35,7 @@
                 return ''
             },
             formatRecordsPerPage: function(pageNumber) {
-                return pageNumber + ' rows visible'
+                return pageNumber + '  Gözüken Kişi Sayısı'
             }
         })
     })

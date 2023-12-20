@@ -533,3 +533,8 @@ h1 small {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+
+.btn-default {
+    background: transparent !important;
+}
